@@ -5,3 +5,10 @@ C:\Users\Tom\source\repos\COBWEBS\COBWEBS\bin\Debug\COBWEBS.exe
 C:\Users\Tom\source\repos\COBWEBS\COBWEBS\bin\Debug\COBWEBS.pdb
 C:\Users\Tom\source\repos\COBWEBS\COBWEBS\obj\Debug\COBWEBS.exe
 C:\Users\Tom\source\repos\COBWEBS\COBWEBS\obj\Debug\COBWEBS.pdb
+E:\GIT\test\GuessTheNumber\COBWEBS\bin\Debug\COBWEBS.exe.config
+E:\GIT\test\GuessTheNumber\COBWEBS\bin\Debug\COBWEBS.exe
+E:\GIT\test\GuessTheNumber\COBWEBS\bin\Debug\COBWEBS.pdb
+E:\GIT\test\GuessTheNumber\COBWEBS\obj\Debug\COBWEBS.csprojAssemblyReference.cache
+E:\GIT\test\GuessTheNumber\COBWEBS\obj\Debug\COBWEBS.csproj.CoreCompileInputs.cache
+E:\GIT\test\GuessTheNumber\COBWEBS\obj\Debug\COBWEBS.exe
+E:\GIT\test\GuessTheNumber\COBWEBS\obj\Debug\COBWEBS.pdb

@@ -20,8 +20,7 @@ namespace COBWEBS
         private readonly Random random;
         private readonly Stopwatch sw;      
         private readonly object stopLock;
-        private static readonly object logLocker;
-        private readonly Logging log;
+        private Logging log;
 
         public bool GameFinished
         {
@@ -42,11 +41,6 @@ namespace COBWEBS
             }
         }
 
-        static Game()
-        {
-            logLocker = new object();
-        }
-
         public Game()
         {
             sw = new Stopwatch();
@@ -56,15 +50,15 @@ namespace COBWEBS
             basketWeight = 0;
             random = new Random();
             GameFinished = false;
-            log = new Logging(ConfigurationManager.AppSettings[Consts.LOG_PATH]);
         }
 
         public void InitGame()
         {
+            log = new Logging();
             int rangeFirstNum = int.Parse(ConfigurationManager.AppSettings[Consts.RANGE_FIRST_NUM]);
             int rangeLastNum = int.Parse(ConfigurationManager.AppSettings[Consts.RANGE_LAST_NUM]);
             log.DeleteFile();
-            log.WriteToLog("Initialize game");            
+            log.WriteToLog("Initialize game");
             basketWeight = random.Next(rangeFirstNum, rangeLastNum + 1);
             log.WriteToLog($"Basket weight is: '{basketWeight}'");
 
@@ -106,6 +100,7 @@ namespace COBWEBS
                         if (result == basketWeight || gameData.totalAttempts == 100 || sw.ElapsedMilliseconds > 1500)
                         {
                             GameFinished = true;
+                            sw.Stop();
                             return;
                         }
                         log.WriteToLog($"{sw.ElapsedMilliseconds}->Player '{p.Name}' guessed wrong and will wait for : '{Math.Abs(result - basketWeight)}' milliseconds");
@@ -132,6 +127,15 @@ namespace COBWEBS
             }
             else
             {
+                if (gameData.totalAttempts >= 100)
+                {
+                    InputOutput.GameEndTriggerTotalGuesses(gameData.totalAttempts);
+                }
+                else
+                {
+                    InputOutput.GameEndTriggerMilliseconds(sw.ElapsedMilliseconds);
+                }
+
                 InputOutput.PrintClosestWinner(winnerGuess.PlayerName, winnerGuess.Number);
             }
 
@@ -163,8 +167,6 @@ namespace COBWEBS
 
                     i++;
                 }
-
-
             }
 
             return winnerGuess;

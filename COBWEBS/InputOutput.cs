@@ -58,12 +58,23 @@ namespace COBWEBS
 
         public static void PrintWinner(string playerName, int totalAttempts)
         {
-            Console.WriteLine($"The winner is {playerName} after total guesses of {totalAttempts} in the game");
+            Console.WriteLine($"'{playerName}' guessed the number correctly and he is the winner!");
+            Console.WriteLine($"Total guesses in the game was: {totalAttempts}");
         }
 
         public static void PrintClosestWinner(string playerName, int guess)
+        {            
+            Console.WriteLine($"'{playerName}' guessed the number '{guess}' which is the closest one and he is the winner!");
+        }
+
+        public static void GameEndTriggerTotalGuesses(int totalGuesses)
         {
-            Console.WriteLine($"The winner is '{playerName}' with the closest guest: '{guess}'");
+            Console.WriteLine($"'Game ended after reaching {totalGuesses} total guesses.");
+        }
+
+        public static void GameEndTriggerMilliseconds(long milliseconds)
+        {
+            Console.WriteLine($"'Game ended after {milliseconds} milliseconds passed.");
         }
     }
 }

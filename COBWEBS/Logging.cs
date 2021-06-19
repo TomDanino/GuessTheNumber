@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,8 @@ namespace COBWEBS
     {
         private readonly string logPath;
         private readonly StringBuilder sb;
+        private readonly bool createLogFile;
+
         private static readonly object locker;
 
         static Logging()
@@ -18,28 +21,49 @@ namespace COBWEBS
             locker = new object();
         }
 
-        public Logging(string logPath)
+        public Logging()
         {
             sb = new StringBuilder();
-            this.logPath = logPath;
+            this.logPath = ConfigurationManager.AppSettings[Consts.LOG_PATH];
+            this.createLogFile = bool.Parse(ConfigurationManager.AppSettings[Consts.CREATE_LOG_FILE]);
         }
 
         public void DeleteFile()
         {
-            File.Delete(logPath);
+            try
+            {
+                if (createLogFile)
+                { 
+                    File.Delete(logPath);
+                    }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Can't delete '{logPath}' log file, please choose a valid path", ex);
+            }
         }
 
         public void WriteToLog(string message)
         {
             lock (locker)
             {
-                sb.Append(message);
+                sb.AppendLine(message);
             }
         }
 
         public void CreateLogFile()
         {
-            File.AppendAllText(logPath, sb.ToString());
+            try
+            {
+                if (createLogFile)
+                {
+                    File.AppendAllText(logPath, sb.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Can't create '{logPath}' log file, please choose a valid path", ex);
+            }
         }
     }
 }

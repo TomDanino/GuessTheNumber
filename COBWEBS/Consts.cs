@@ -8,5 +8,6 @@
         public const string MAX_NUM_OF_PLAYERS = "maxNumOfPlayers";
         public const string RANGE_FIRST_NUM = "rangeFirstNum";
         public const string RANGE_LAST_NUM= "rangeLastNum";
+        public const string CREATE_LOG_FILE = "createLogFile";
     }
 }

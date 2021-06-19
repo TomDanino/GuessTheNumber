@@ -14,7 +14,7 @@ namespace COBWEBS
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Unexpected error occured.");
+                Console.WriteLine($"Unexpected error occured: {ex.Message}");
             }
             Console.Read();
 
